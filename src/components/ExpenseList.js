@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ExpenseItem from "./ExpenseItem";
+import { MdDelete } from "react-icons/md";
 
 const Lists = styled.ul`
   list-style-type: none;
@@ -14,7 +15,10 @@ function ExpenseList() {
       <ul>
         <ExpenseItem></ExpenseItem>
       </ul>
-      <button>목록 지우기</button>
+      <button className="btn">
+        목록 삭제
+        <MdDelete className="btn-icon" />
+      </button>
     </>
   );
 }

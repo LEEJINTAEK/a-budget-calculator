@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { MdSend } from "react-icons/md";
 
 const FormCenter = styled.div`
   display: flex;
@@ -39,7 +40,10 @@ function ExpenseForm() {
           <Input type="number" placeholder="예) 100" />
         </FormGroup>
       </FormCenter>
-      <button type="submit">제출</button>
+      <button type="submit" className="btn">
+        제출
+        <MdSend className="btn-icon" />
+      </button>
     </form>
   );
 }

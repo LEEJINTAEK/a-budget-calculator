@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { MdEdit, MdDelete } from "react-icons/md";
 
 const Li = styled.li`
   background-color: var(--mainWhite);
@@ -54,8 +55,12 @@ function ExpenseItem() {
         <Amout>10000원</Amout>
       </Info>
       <div>
-        <EditBtn>수정</EditBtn>
-        <ClearBtn>삭제</ClearBtn>
+        <EditBtn>
+          <MdEdit />
+        </EditBtn>
+        <ClearBtn>
+          <MdDelete />
+        </ClearBtn>
       </div>
     </Li>
   );
