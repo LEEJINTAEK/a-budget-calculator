@@ -27,17 +27,27 @@ const Input = styled.input`
   padding: 0;
 `;
 
-function ExpenseForm() {
+function ExpenseForm(props) {
   return (
-    <form>
+    <form onSubmit={props.handleSubmit}>
       <FormCenter>
         <FormGroup>
           <Label>지출 항목</Label>
-          <Input type="text" placeholder="예) 렌트비" />
+          <Input
+            type="text"
+            placeholder="예) 렌트비"
+            onChange={props.handleCharge}
+            value={props.charge}
+          />
         </FormGroup>
         <FormGroup>
           <Label>비용</Label>
-          <Input type="number" placeholder="예) 100" />
+          <Input
+            type="number"
+            placeholder="예) 100"
+            onChange={props.handleAmount}
+            value={props.amount}
+          />
         </FormGroup>
       </FormCenter>
       <button type="submit" className="btn">
