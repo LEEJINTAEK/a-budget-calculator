@@ -47,18 +47,18 @@ const EditBtn = styled.button`
   ${Btn}
 `;
 
-function ExpenseItem() {
+function ExpenseItem(props) {
   return (
     <Li>
       <Info>
-        <Expense>학원등록</Expense>
-        <Amout>10000원</Amout>
+        <Expense>{props.expense.charge}</Expense>
+        <Amout>{props.expense.amount}원</Amout>
       </Info>
       <div>
-        <EditBtn>
+        <EditBtn onClick={() => console.log(props.expense.id)}>
           <MdEdit />
         </EditBtn>
-        <ClearBtn>
+        <ClearBtn onClick={() => props.handleDelete(props.expense.id)}>
           <MdDelete />
         </ClearBtn>
       </div>

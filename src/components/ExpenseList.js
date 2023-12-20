@@ -9,12 +9,18 @@ const Lists = styled.ul`
   padding: 0;
 `;
 
-function ExpenseList() {
+function ExpenseList(props) {
   return (
     <>
-      <ul>
-        <ExpenseItem></ExpenseItem>
-      </ul>
+      <Lists>
+        {props.expenses.map((expense) => (
+          <ExpenseItem
+            expense={expense}
+            key={expense.id}
+            handleDelete={props.handleDelete}
+          />
+        ))}
+      </Lists>
       <button className="btn">
         목록 삭제
         <MdDelete className="btn-icon" />
