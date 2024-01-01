@@ -55,7 +55,7 @@ function ExpenseItem(props) {
         <Amout>{props.expense.amount}원</Amout>
       </Info>
       <div>
-        <EditBtn onClick={() => console.log(props.expense.id)}>
+        <EditBtn onClick={() => props.handleEdit(props.expense.id)}>
           <MdEdit />
         </EditBtn>
         <ClearBtn onClick={() => props.handleDelete(props.expense.id)}>

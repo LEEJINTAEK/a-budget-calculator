@@ -51,7 +51,7 @@ function ExpenseForm(props) {
         </FormGroup>
       </FormCenter>
       <button type="submit" className="btn">
-        제출
+        {props.edit ? "수정" : "제출"}
         <MdSend className="btn-icon" />
       </button>
     </form>

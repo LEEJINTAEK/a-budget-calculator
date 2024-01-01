@@ -18,10 +18,11 @@ function ExpenseList(props) {
             expense={expense}
             key={expense.id}
             handleDelete={props.handleDelete}
+            handleEdit={props.handleEdit}
           />
         ))}
       </Lists>
-      <button className="btn">
+      <button className="btn" onClick={() => props.clearData()}>
         목록 삭제
         <MdDelete className="btn-icon" />
       </button>

@@ -15,6 +15,8 @@ function App() {
   const [amount, setAmount] = useState(0);
   const [data, newData] = useState([]);
   const [alert, setAlert] = useState({ show: false });
+  const [id, setId] = useState("");
+  const [edit, setEdit] = useState(false);
 
   const handleCharge = (e) => {
     setCharge(e.target.value);
@@ -25,11 +27,20 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (charge !== "" && amount > 0) {
-      const newChargeData = { id: crypto.randomUUID(), charge, amount };
-      newData([...data, newChargeData]);
+      if (edit) {
+        const newChargeData = data.map((item) => {
+          return item.id === id ? { ...item, charge, amount } : item;
+        });
+        newData(newChargeData);
+        setEdit(false);
+        handleAlert({ type: "success", text: "목록이 수정되었습니다" });
+      } else {
+        const newChargeData = { id: crypto.randomUUID(), charge, amount };
+        newData([...data, newChargeData]);
+        handleAlert({ type: "success", text: "목록이 추가되었습니다" });
+      }
       setCharge("");
       setAmount(0);
-      handleAlert({ type: "success", text: "목록이 추가되었습니다" });
     } else {
       handleAlert({
         type: "danger",
@@ -44,10 +55,22 @@ function App() {
       setAlert({ show: false });
     }, 7000);
   };
-  const handleDelete = (Id) => {
-    const newFakeData = data.filter((data) => data.id !== Id);
+  const handleDelete = (id) => {
+    const newFakeData = data.filter((data) => data.id !== id);
     newData(newFakeData);
     handleAlert({ type: "danger", text: "목록이 삭제되었습니다." });
+  };
+  const handleEdit = (id) => {
+    const expense = data.find((item) => item.id === id);
+    const { charge, amount } = expense;
+    setCharge(charge);
+    setAmount(amount);
+    setId(id);
+    setEdit(true);
+  };
+
+  const clearData = () => {
+    newData([]);
   };
 
   return (
@@ -61,17 +84,23 @@ function App() {
           amount={amount}
           handleAmount={handleAmount}
           handleSubmit={handleSubmit}
+          edit={edit}
         />
       </div>
       <div style={{ width: "100%", backgroundColor: "white", padding: "1rem" }}>
-        <ExpenseList expenses={data} handleDelete={handleDelete} />
+        <ExpenseList
+          expenses={data}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          clearData={clearData}
+        />
       </div>
       <div
         style={{ display: "flex", justifyContent: "end", marginTop: "1rem" }}
       >
         <p style={{ fontSize: "2rem" }}>
           총 지출:
-          <span>원</span>
+          <span>{data.reduce((a, c) => a + c.amount, 0)}원</span>
         </p>
       </div>
     </Main>
